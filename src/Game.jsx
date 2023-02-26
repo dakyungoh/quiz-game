@@ -1,16 +1,20 @@
 import { useState } from "react";
 import questionList from "./question-list";
+import { useNavigate } from "react-router-dom";
 
-function Game() {
+function Game({ userAnswerList, setUserAnswerList }) {
+  const navigate = useNavigate();
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(questionList[0]);
 
-  function onClickAnswerItem() {
+  function onClickAnswerItem(answerIndex) {
+    setUserAnswerList([...userAnswerList, answerIndex]);
     if (questionNumber + 1 < questionList.length) {
       setQuestionNumber(questionNumber + 1);
       setCurrentQuestion(questionList[questionNumber + 1]);
     } else {
-      // 게임 종료 페이지로 이동
+      navigate("/result");
     }
   }
 
@@ -19,8 +23,12 @@ function Game() {
       <div className="game-number">{questionNumber}번 문제</div>
       <div className="game-question">{currentQuestion.question}</div>
       <div className="game-answer-list">
-        {currentQuestion.answerList.map((answerItem) => (
-          <div className="game-answer-item" onClick={onClickAnswerItem}>
+        {currentQuestion.answerList.map((answerItem, index) => (
+          <div
+            key={answerItem}
+            className="game-answer-item"
+            onClick={() => onClickAnswerItem(index)}
+          >
             {answerItem}
           </div>
         ))}
