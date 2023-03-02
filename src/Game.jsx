@@ -21,7 +21,7 @@ function Game({ userAnswerList, setUserAnswerList }) {
   return (
     <div className="game">
       <div className="game-number">{questionNumber}번 문제</div>
-      <div className="game-question">{currentQuestion.question}</div>
+      <div className="game-question">💡{currentQuestion.question}</div>
       <div className="game-answer-list">
         {currentQuestion.answerList.map((answerItem, index) => (
           <div
@@ -29,7 +29,7 @@ function Game({ userAnswerList, setUserAnswerList }) {
             className="game-answer-item"
             onClick={() => onClickAnswerItem(index)}
           >
-            {answerItem}
+            🔘{answerItem}
           </div>
         ))}
       </div>

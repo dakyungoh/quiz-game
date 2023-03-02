@@ -32,7 +32,7 @@ function Result({ userAnswerList }) {
         })}
         <div>문제 개수: {totalQuestionCount}</div>
         <div>정답 개수: {score}</div>
-        <div>점수: {score100}</div>
+        <div className="score">점수: {score100}</div>
       </div>
     </div>
   );
