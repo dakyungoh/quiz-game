@@ -34,11 +34,14 @@
 
 .game-number {
   padding-top: 10px;
+  border-radius: 10px;
 }
+
 .game-question {
   padding-top: 10px;
   font-size: 40px;
 }
+
 .game-answer-list {
   font-size: 30px;
 }
