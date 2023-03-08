@@ -12,6 +12,10 @@ function Result({ userAnswerList }) {
   }
   const score100 = Math.ceil((score / totalQuestionCount) * 100);
 
+  function onclickReset() {
+    navigate("/");
+  }
+
   return (
     <div className="result">
       <div className="result-title">결과</div>
@@ -36,7 +40,9 @@ function Result({ userAnswerList }) {
         <div>문제 개수: {totalQuestionCount}</div>
         <div>정답 개수: {score}</div>
         <div className="score">점수: {score100}</div>
-        <button onClick={onclickReset}>처음으로 돌아가기</button>
+        <button className="reset-button" onClick={onclickReset}>
+          처음으로 돌아가기
+        </button>
       </div>
     </div>
   );
