@@ -25,7 +25,12 @@ function App() {
     },
     {
       path: "/result",
-      element: <Result userAnswerList={userAnswerList} />,
+      element: (
+        <Result
+          userAnswerList={userAnswerList}
+          setUserAnswerList={setUserAnswerList}
+        />
+      ),
     },
   ]);
 

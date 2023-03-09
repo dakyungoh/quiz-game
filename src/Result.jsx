@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import questionList from "./question-list";
 
-function Result({ userAnswerList }) {
+function Result({ userAnswerList, setUserAnswerList }) {
   const navigate = useNavigate();
   const totalQuestionCount = questionList.length;
   let score = 0;
@@ -14,6 +14,7 @@ function Result({ userAnswerList }) {
 
   function onclickReset() {
     navigate("/");
+    setUserAnswerList([]);
   }
 
   return (
