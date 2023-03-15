@@ -1,18 +1,20 @@
-import { useNavigate } from "react-router";
 import questionList from "./question-list";
+import { useNavigate } from "react-router-dom";
 
-function Result({ userAnswerList, setUserAnswerList }) {
+export default function Result({ userAnswerList, setUserAnswerList }) {
   const navigate = useNavigate();
-  const totalQuestionCount = questionList.length;
+
+  const totalCount = questionList.length;
   let score = 0;
-  for (let i = 0; i < totalQuestionCount; i++) {
+  for (let i = 0; i < totalCount; i++) {
     if (questionList[i].correctAnswer === userAnswerList[i]) {
       score += 1;
     }
   }
-  const score100 = Math.ceil((score / totalQuestionCount) * 100);
 
-  function onclickReset() {
+  const score100 = Math.round((score / totalCount) * 100);
+
+  function resetButton() {
     navigate("/");
     setUserAnswerList([]);
   }
@@ -20,33 +22,28 @@ function Result({ userAnswerList, setUserAnswerList }) {
   return (
     <div className="result">
       <div className="result-title">결과</div>
-      <div className="result-user-answer-list">
+      <div className="result-questionNumber">
         {questionList.map((currentQuestion, questionNumber) => {
           return (
-            <div key={currentQuestion.question}>
-              <div className="game-number">{questionNumber + 1}번 문제</div>
-              <div className="game-question">{currentQuestion.question}</div>
-              <div className="game-answer">
-                정답:{" "}
-                {currentQuestion.answerList[currentQuestion.correctAnswer]}
+            <>
+              <div className="result-question">{currentQuestion.question}</div>
+              <div className="result-answer">
+                정답:
+                {currentQuestion.correctAnswer}
               </div>
-              <div className="user-answer">
-                답변:{" "}
-                {currentQuestion.answerList[userAnswerList[questionNumber]] ||
-                  "-"}
+              <div className="result-user-answer">
+                답변 : {userAnswerList[questionNumber] || "-"}
               </div>
-            </div>
+            </>
           );
         })}
-        <div>문제 개수: {totalQuestionCount}</div>
-        <div>정답 개수: {score}</div>
-        <div className="score">점수: {score100}</div>
-        <button className="reset-button" onClick={onclickReset}>
-          처음으로 돌아가기
-        </button>
       </div>
+      <div>문제 갯수 : {totalCount}</div>
+      <div>정답 갯수 : {score}</div>
+      <div className="score">점수 : {score100}</div>
+      <button className="reset=button" onClick={resetButton}>
+        처음으로 돌아가기
+      </button>
     </div>
   );
 }
-
-export default Result;
